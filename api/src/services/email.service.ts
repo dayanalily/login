@@ -1,7 +1,5 @@
 import { /* inject, */ BindingScope, injectable} from '@loopback/core';
 
-import Mail = require('nodemailer/lib/mailer');
-const nodemailer = require("nodemailer");
 
 
 @injectable({scope: BindingScope.TRANSIENT})
