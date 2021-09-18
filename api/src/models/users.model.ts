@@ -1,6 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from '@loopback/repository';
 
-@model({settings: {strict: false}})
+@model({ settings: { strict: false } })
 export class Users extends Entity {
   @property({
     type: 'string',
@@ -11,79 +11,147 @@ export class Users extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
-  name: string;
+  nombreComercial: string;
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
-  run: string;
+  razonSocial: string;
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
-  fatherName: string;
+  rubro: string;
 
   @property({
     type: 'string',
+    required: false,
   })
-  motherName?: string;
+  nombres: string;
+  
+  @property({
+    type: 'string',
+    required: false,
+  })
+  apellidos: string;
 
   @property({
     type: 'string',
+    required: false,
   })
-  businessName?: string; // razon social
+  email: string;
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
-  gender: string; // sexo
-
-  // desde aca
-  @property({
-    type: 'string',
-  })
-  fhoto?: string;
+  mailRecuperacion: string;
 
   @property({
     type: 'string',
+    required: false,
   })
-  role?: string;
+  rut: string;
 
+  @property({
+    type: 'string',
+    required: false,
+  })
+  tlfPpal: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  tlfAlternativo: string;
+
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  tlfFijo: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  profesion: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  cargo: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  pais: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  region: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  comuna: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  ciudad: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  calle: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  numero: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  depto: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  codigoPostal: string;
+
+  @property({
+    type: 'string',
+    required: false,
+  })
+  password: string;
   @property({
     type: 'object',
+    required: false,
   })
   asociados?: object;   //asicados son los socios de persona juridica
 
   @property({
-    type: 'string',
-  })
-  password?: string;
-
-
-  @property({
-    type: 'string',
-  })
-  photo?: string;
-
-
-  @property({
     type: 'boolean',
-    default: false,
-
+    default: true,
   })
-  verified?: boolean;
-
-
-
-  @property({
-    type: 'string',
-  })
-  email?: string;
+  create?: string;
 
   @property({
     type: 'boolean',

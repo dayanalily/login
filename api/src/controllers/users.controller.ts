@@ -1,5 +1,5 @@
 import {authenticate} from '@loopback/authentication';
-import {inject} from '@loopback/core';
+import {inject, service} from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -18,9 +18,10 @@ import stream from 'stream';
 import {Users} from '../models';
 import {UsersRepository} from '../repositories';
 import {AuthService} from '../services/auth.service';
+import { EmailService } from '../services/email.service';
 
 class Credentials {
-  run: string
+  email: string
   password: string
 }
 
@@ -36,11 +37,13 @@ function bufferToStream(buffer: any) {
 @authenticate('jwt')
 export class UsersController {
   authServices: AuthService
+  email: EmailService
   constructor(
     @repository(UsersRepository)
     public usersRepository: UsersRepository,
   ) {
     this.authServices = new AuthService(usersRepository)
+    this.email = new EmailService()
   }
 
   @authenticate.skip()
@@ -190,15 +193,17 @@ export class UsersController {
     @requestBody() credentials: Credentials
   ): Promise<Object> {
     try {
-      const user = await this.authServices.Indentify(credentials.run, credentials.password)
+      const user = await this.authServices.Indentify(credentials.email, credentials.password)
       if (user) {
         const tk = await this.authServices.GenerateToken(user)
+        await this.email.sendMail(credentials.email, "Bienvenido a Bodega Libre", "Bienvenido");
         return {
           data: user,
           token: tk
         }
       } else {
         throw new HttpErrors[401]('User or Password invalid.')
+
       }
     } catch (error) {
       throw new HttpErrors[401]('User or Password invalid.')

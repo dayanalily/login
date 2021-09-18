@@ -1,5 +1,5 @@
-import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
-import {juggler} from '@loopback/repository';
+import { inject, lifeCycleObserver, LifeCycleObserver } from '@loopback/core';
+import { juggler } from '@loopback/repository';
 
 const config = {
   // name: 'mongo',
@@ -17,10 +17,13 @@ const config = {
   host: process.env.BDD_HOST,
   port: process.env.BDD_PORT,
   user: process.env.BDD_USER,
+  roles: [{ role: "userAdminAnyDatabase", db: "ecomerce" }],
   password: process.env.BDD_PWD,
   database: process.env.BDD_DATABASE,
   useNewUrlParser: true
 };
+
+
 
 // Observe application's life cycle to disconnect the datasource when
 // application is stopped. This allows the application to be shut down
@@ -33,7 +36,7 @@ export class MongoDataSource extends juggler.DataSource
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.mongo', {optional: true})
+    @inject('datasources.config.mongo', { optional: true })
     dsConfig: object = config,
   ) {
     super(dsConfig);
